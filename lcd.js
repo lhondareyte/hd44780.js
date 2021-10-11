@@ -124,8 +124,8 @@ class createLCD {
         this.font = default_font;
         this.backlight = 'yellow';
         this.pixelColor = 'black';
-        this.backColor = "#ccff99';      // Pixel color when off
-        this.displayBuffer = this.rows * this.columns ; 
+        this.backColor = '#ccff99';      // Pixel color when off
+        this.displayBuffer = new Array (this.rows * this.columns) ; 
 
         /* character dimensions in pixels */
         const char_width = 6 ; 
@@ -145,9 +145,9 @@ class createLCD {
         }
 
         /* LCD_drawchar(line, column, character */
-        function LCD_drawchar (l, c, ch) {
+        this.drawchar = function (l, c, ch) {
 
-            if ( l == undefined ) { l = O; } else { l = l - 1; }
+            if ( l == undefined ) { l = O; }
             if ( c == undefined ) { c = 0; } 
             if ( ch == undefined ) { ch = " "; }
 
@@ -162,8 +162,8 @@ class createLCD {
             let svg = document.getElementById(this.documentId);
             let shape = document.createElementNS(svgns, "rect");
 
-            let origin_x = c_space + (width * column );
-            let origin_y = c_space + (height * line );
+            let origin_x = c_space + (w * c );
+            let origin_y = c_space + (h * l );
 
             /*  Draw background */
             shape.setAttributeNS(null, "x", origin_x); 
@@ -194,11 +194,6 @@ class createLCD {
                     shape.setAttributeNS(null, "width", p_size);
                     shape.setAttributeNS(null, "height", p_size);
                     shape.setAttributeNS(null, "fill", color);
-                    /*
-                      shape.animate(null, "fill", 1000);
-                      shape.animate(null, "blink", backlight);
-                      shape.animate(null, "duration", 100000);
-                     */
                     svg.appendChild(shape);
                     y = y + p_size + p_space;
                 }
@@ -208,17 +203,17 @@ class createLCD {
 
         this.refresh = function() {
             let c = 0;    // Character counter
-            for (let i = 0 ; i++ ; i< this.rows) {
-                for (let j = 0 ; j++ ; j < this.columns) {
-                    LCD_drawchar(i, j, this.displayBuffer[c]);
+            for (let i = 0 ; i< this.rows ; i++) {
+                for (let j = 0 ; j < this.columns ; j++) {
+                    this.drawchar(i, j, this.displayBuffer[c]);
                     c++;
                 }
             }
         }
 
-        this.cls = function() {
-            for (let i=0 ; i++ ; i < this.rows * this.columns ) {
-                this.displayBuffer[i] = 0x20;
+        this.clear = function() {
+            for (let i = 0 ; i < this.rows * this.columns ; i++) {
+                this.displayBuffer[i] = " ";
             }
             this.refresh();
         }
