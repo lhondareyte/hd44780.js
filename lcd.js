@@ -114,17 +114,17 @@ function  bitIsSet(c,b) {
 }
 
 class createLCD {
-    constructor (id, rows = '16', columns = '2', width = '400', height = '50', scale = '1', font = 'default_font', backlight = 'yellow', pixelColor = 'black', backColor = '#ccff99' ) {
+    constructor (id) {
         this.documentId = id;
-        this.rows = rows;
-        this.columns = columns;
-        this.width = width;
-        this.height = height;
-        this.scale = scale;
-        this.font = font;
-        this.backlight = backlight;
-        this.pixelColor = pixelColor;
-        this.backColor = backColor;      // Pixel color when off
+        this.rows = 2;
+        this.columns = 16;
+        this.width = 400;
+        this.height = 50;
+        this.scale = 1;
+        this.font = default_font;
+        this.backlight = 'yellow';
+        this.pixelColor = 'black';
+        this.backColor = "#ccff99';      // Pixel color when off
         this.displayBuffer = this.rows * this.columns ; 
 
         /* character dimensions in pixels */
