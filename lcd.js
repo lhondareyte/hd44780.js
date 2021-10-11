@@ -110,7 +110,7 @@ function  bitIsSet(c,b) {
     if ((c == undefined) || (b == undefined) || (b > 32)) {
         return -1; 
     }
-    return (c >> b ) & 1;
+    return (c >> b) & 1;
 }
 
 class createLCD {
@@ -155,15 +155,15 @@ class createLCD {
             let p_space = 1.2 * this.scale;     /* space between two pixels */
             let c_space = 0.7 * this.scale;     /* space between two characters */ 
 
-            let w = ( p_size + p_space) * char_width + c_space ;
-            let h = ( p_size + p_space) * char_height + c_space ;
+            let w = ( p_size + p_space ) * char_width + c_space ;
+            let h = ( p_size + p_space ) * char_height + c_space ;
 
             let svgns = "http://www.w3.org/2000/svg";
             let svg = document.getElementById(this.documentId);
             let shape = document.createElementNS(svgns, "rect");
 
-            let origin_x = c_space + (w * c );
-            let origin_y = c_space + (h * l );
+            let origin_x = c_space + ( w * c );
+            let origin_y = c_space + ( h * l );
 
             /*  Draw background */
             shape.setAttributeNS(null, "x", origin_x); 
@@ -178,11 +178,11 @@ class createLCD {
             let matrix = [];
             matrix = getFontChar(this.font,ch); 
             x = origin_x + c_space;
-            for (let j = 0; j < char_width; j++) {  
+            for (let j = 0 ; j < char_width ; j++) {  
                 y = origin_y + c_space ;
-                for (let i = 0; i < char_height ; i++) {
+                for (let i = 0 ; i < char_height ; i++) {
                     color = this.backlight;
-                    if (bitIsSet(matrix[j],i)) {
+                    if (bitIsSet(matrix[j], i)) {
                         color = this.pixelColor;
                     }
                     if ( j == char_width - 1 ) {
@@ -235,6 +235,7 @@ class createLCD {
         this.setFont = function(a) {
             if ( typeof n == 'array' ) {
                 this.font = a;
+                this.refresh();
             }
         }
 
@@ -242,6 +243,7 @@ class createLCD {
             if ( typeof n == 'number' ) {
                 this.rows = n;
                 this.displayBuffer.length = this.rows * this.columns ; 
+                this.refresh();
             }
         }
 
@@ -249,6 +251,7 @@ class createLCD {
             if ( typeof n == 'number' ) {
                 this.columns = n;
                 this.displayBuffer.length = this.rows * this.columns ; 
+                this.refresh();
             }
         }
 
@@ -283,12 +286,14 @@ class createLCD {
         this.setHeight = function(n) {
             if ( typeof n == 'number' ) {
                 this.height = n;
+                this.refresh();
             }
         }
 
         this.setWidth = function(n) {
             if ( typeof n == 'number' ) {
                 this.width = n;
+                this.refresh();
             }
         }
     }
