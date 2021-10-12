@@ -131,9 +131,8 @@ class createLCD {
         const char_width = 6 ; 
         const char_height = 8 ; 
 
-        /* Current cursor position */
-        this.curent_column = 0;
-        this.current_row = 0;
+        /* Current cursor location (index in displayBuffer[] ) */
+        this.current_location = 0;
 
         function getFontChar (f, ch) {
             /* return space character if 'c' is not a printable */
@@ -201,6 +200,7 @@ class createLCD {
             }
         }
 
+        /* Update display */
         this.refresh = function() {
             let c = 0;    // Character counter
             for (let i = 0 ; i< this.rows ; i++) {
@@ -211,20 +211,31 @@ class createLCD {
             }
         }
 
+        /* Clear all display */
         this.clear = function() {
             for (let i = 0 ; i < this.rows * this.columns ; i++) {
                 this.displayBuffer[i] = " ";
             }
+            this.current_location = 0;
             this.refresh();
         }
-
+        
+        /*
+         *  Move cursor to (x,y)
+         *             x
+         *     +---+---+---+---+
+         *     |1,1|   |   |   |
+         *   y +---+---+---+---+
+         *     |   |   |   |4,2|
+         *     +---+---+---+---+
+         */
         this.gotoxy = function(x,y) {
-            if ( typeof x == 'number' && typeof x == 'number' ) {
-                this.current_column = x;
-                this.current_row = y;
+            if ( typeof x == 'number' && typeof y == 'number' ) {
+                this.current_location = (this.columns * (y-1) ) + x;
             }
         }
 
+        /* Print string at current location */
         this.puts = function(s) {
             if ( typeof s == 'string' ) {
 
@@ -232,6 +243,7 @@ class createLCD {
             }
         }
 
+        /* Select alternate font */
         this.setFont = function(a) {
             if ( typeof n == 'array' ) {
                 this.font = a;
@@ -255,6 +267,7 @@ class createLCD {
             }
         }
 
+        /* Set backlight color */
         this.setBacklight = function(n) {
             if ( typeof n == 'number' ) {
                 this.backlight = n;
@@ -276,6 +289,7 @@ class createLCD {
             }
         }
 
+        /* Set scale, default 1 */
         this.setScale = function(n) {
             if ( typeof n == 'number' && n > 0) {
                 this.scale = n;
