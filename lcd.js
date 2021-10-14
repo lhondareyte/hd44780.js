@@ -113,7 +113,7 @@ function  bitIsSet(c,b) {
     return (c >> b) & 1;
 }
 
-class createLCD {
+class newLCD {
     constructor (id) {
         this.documentId = id;
         this.rows = 2;
