@@ -2,7 +2,7 @@
   Copyright (c) 2021 Luc Hondareyte
 
   Javascript class to mimic an LCD display based on HD44780
-*/
+  */
 
 /* Default 7x5 font */
 
@@ -219,7 +219,7 @@ class newLCD {
             this.current_location = 0;
             this.refresh();
         }
-        
+
         /*
          *  Move cursor to (x,y)
          *             x
@@ -235,10 +235,21 @@ class newLCD {
             }
         }
 
+        this.currentLine() {
+        }
+
         /* Print string at current location */
         this.puts = function(s) {
+            const a = s.split('');
             if ( typeof s == 'string' ) {
-
+                for (let i = this.current_location ; i < (this.columns * this.rows); i++) {
+                    /* new line character */
+                    if ( a[i - this.current_location] == '\n' ) {
+                    }
+                    else {
+                        this.displayBuffer[i] = a[i - this.current_location];
+                    }
+                }
                 this.refresh();
             }
         }
