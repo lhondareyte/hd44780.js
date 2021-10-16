@@ -225,7 +225,7 @@ class newLCD {
          *             x
          *     +---+---+---+---+
          *     |1,1|   |   |   |
-         *   y +---+---+---+---+
+         *  y  +---+---+---+---+
          *     |   |   |   |4,2|
          *     +---+---+---+---+
          */
@@ -235,19 +235,26 @@ class newLCD {
             }
         }
 
-        this.currentLine() {
+        this.currentLine = function () {
+            var l = Math.floor (this.current_location / this.columns);
+            var r = this.current_location % this.columns ; 
+            if ( r != 0 ) { l = l + 1; }
+            return (l);
         }
 
         /* Print string at current location */
         this.puts = function(s) {
             const a = s.split('');
             if ( typeof s == 'string' ) {
-                for (let i = this.current_location ; i < (this.columns * this.rows); i++) {
+                for (let i = 0 ; i < a.length; i++) {
+                    if ( this.current_location > (this.columns * this.rows ) ) { break; }
                     /* new line character */
-                    if ( a[i - this.current_location] == '\n' ) {
+                    if ( a[i] == '\n' ) {
+                        this.current_location = ( this.currentLine() * this.columns ) ;
                     }
                     else {
-                        this.displayBuffer[i] = a[i - this.current_location];
+                        this.displayBuffer[this.current_location] = a[i];
+                        this.current_location++;
                     }
                 }
                 this.refresh();
