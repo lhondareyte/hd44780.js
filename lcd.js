@@ -231,7 +231,7 @@ class newLCD {
          */
         this.gotoxy = function(x,y) {
             if ( typeof x == 'number' && typeof y == 'number' ) {
-                this.current_location = (this.columns * (y-1) ) + x;
+                this.current_location = (this.columns * (y - 1) ) + x - 1;
             }
         }
 
