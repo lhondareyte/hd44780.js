@@ -13,11 +13,24 @@
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 600 200">
             </svg>
+      </div>
+      <div>
+            <input placeholder="Enter some text" name="name"/>
+            <p id="values"></p>
             <script> 
 		var LCD = new newLCD('svg');
 		LCD.clear();
 		LCD.puts("    Hello\n    World!");
+                const input = document.querySelector('input');
+                const log = document.getElementById('values');
+                input.addEventListener('input', updateText);
+                function updateText(e) {
+                   LCD.clear();
+                   LCD.puts(e.target.value);
+                }
+              
             </script>
+
       </div>
    </body>
 </html>
