@@ -287,45 +287,47 @@ class newLCD {
 
         /* Set backlight color */
         this.setBacklight = function(n) {
-            if ( typeof n == 'number' ) {
+            if ( typeof n == 'string' ) {
                 this.backlight = n;
                 this.refresh();
             }
         }
 
         this.setBackColor = function(n) {
-            if ( typeof n == 'number' ) {
+            if ( typeof n == 'string' ) {
                 this.backColor = n;
                 this.refresh();
             }
         }
 
         this.setPixelColor = function(n) {
-            if ( typeof n == 'number' ) {
+            if ( typeof n == 'string' ) {
                 this.pixelColor = n;
                 this.refresh();
             }
         }
 
+        /*
+         * LCD global size methods
+         * must be set at initialisation, before any other method
+         */
+
         /* Set scale, default 1 */
         this.setScale = function(n) {
             if ( typeof n == 'number' && n > 0) {
                 this.scale = n;
-                this.refresh();
             }
         }
 
         this.setHeight = function(n) {
             if ( typeof n == 'number' ) {
                 this.height = n;
-                this.refresh();
             }
         }
 
         this.setWidth = function(n) {
             if ( typeof n == 'number' ) {
                 this.width = n;
-                this.refresh();
             }
         }
     }
