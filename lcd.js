@@ -126,6 +126,7 @@ class newLCD {
         this.pixelColor = 'black';
         this.backColor = '#ccff99';      // Pixel color when off
         this.displayBuffer = new Array (this.rows * this.columns) ; 
+        this.onclick;
 
         /* character dimensions in pixels */
         const char_width = 6 ; 
@@ -170,6 +171,9 @@ class newLCD {
             shape.setAttributeNS(null, "width", w);
             shape.setAttributeNS(null, "height", h);
             shape.setAttributeNS(null, "fill", this.backColor); 
+            if (this.onclick) {
+                shape.setAttributeNS(null, "onclick", onclick); 
+            }
             svg.appendChild(shape);
 
             /* Draw character */
@@ -308,9 +312,16 @@ class newLCD {
         }
 
         /*
-         * LCD global size methods
+         * LCD global methods
          * must be set at initialisation, before any other method
          */
+
+        /* set onclick function */
+        this.setOnClick = function(n) {
+            if ( typeof n == 'string' ) {
+                this.onclick = n;
+            }
+        }
 
         /* Set scale, default 1 */
         this.setScale = function(n) {
