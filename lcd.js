@@ -97,7 +97,7 @@ const default_font = [
     [ 0x1C, 0x20, 0x40, 0x20, 0x1C ],  /*   v   */
     [ 0x3C, 0x40, 0x30, 0x40, 0x3C ],  /*   w   */
     [ 0x44, 0x28, 0x10, 0x28, 0x44 ],  /*   x   */
-    [ 0x0C, 0x50, 0x50, 0x50, 0x3C ],  /*   y   */
+    [ 0x1C, 0xA0, 0xA0, 0xA0, 0x7C ],  /*   y   */
     [ 0x44, 0x64, 0x54, 0x4C, 0x44 ],  /*   z   */
     [ 0x00, 0x08, 0x66, 0x41, 0x01 ],  /*   {   */
     [ 0x00, 0x00, 0x7F, 0x00, 0x00 ],  /*   |   */
@@ -160,12 +160,12 @@ class newLCD {
 
             let svgns = "http://www.w3.org/2000/svg";
             let svg = document.getElementById(this.documentId);
-            let shape = document.createElementNS(svgns, "rect");
 
             let origin_x = c_space + ( w * c );
             let origin_y = c_space + ( h * l );
 
             /*  Draw background */
+            let shape = document.createElementNS(svgns, "rect");
             shape.setAttributeNS(null, "x", origin_x); 
             shape.setAttributeNS(null, "y", origin_y);
             shape.setAttributeNS(null, "width", w);
