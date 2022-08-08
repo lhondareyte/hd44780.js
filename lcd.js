@@ -1,8 +1,8 @@
 /*
   Copyright (c) 2021-2022 Luc Hondareyte
-  Javascript class to mimic an alphanumeric LCD display
+  Javascript module to mimic an alphanumeric LCD display
 
- */
+*/
 
 /* Default 7x5 font */
 
@@ -106,13 +106,6 @@ const default_font = [
     [ 0xff, 0xff, 0xff, 0xff, 0xff ]   /* block */
 ];
 
-function  bitIsSet(c,b) {
-    if ((c == undefined) || (b == undefined) || (b > 32)) {
-        return -1; 
-    }
-    return (c >> b) & 1;
-}
-
 class newLCD {
     constructor (id) {
         this.documentId = id;
@@ -134,6 +127,13 @@ class newLCD {
 
         /* Current cursor location (index in displayBuffer[] ) */
         this.current_location = 0;
+
+        function  bitIsSet(c,b) {
+            if ((c == undefined) || (b == undefined) || (b > 32)) {
+                return -1; 
+            }
+            return (c >> b) & 1;
+        }
 
         function getFontChar (f, ch) {
             /* return space character if 'c' is not a printable */
@@ -329,17 +329,7 @@ class newLCD {
                 this.scale = n;
             }
         }
-
-        this.setHeight = function(n) {
-            if ( typeof n == 'number' ) {
-                this.height = n;
-            }
-        }
-
-        this.setWidth = function(n) {
-            if ( typeof n == 'number' ) {
-                this.width = n;
-            }
-        }
     }
 }
+
+export { newLCD, default_font };
