@@ -1,8 +1,8 @@
 /*
-  Copyright (c) 2021 Luc Hondareyte
+  Copyright (c) 2021-2022 Luc Hondareyte
+  Javascript class to mimic an alphanumeric LCD display
 
-  Javascript class to mimic an LCD display based on HD44780
-  */
+ */
 
 /* Default 7x5 font */
 
@@ -147,9 +147,9 @@ class newLCD {
         /* LCD_drawchar(line, column, character */
         this.drawchar = function (l, c, ch) {
 
-            if ( l == undefined ) { l = O; }
-            if ( c == undefined ) { c = 0; } 
-            if ( ch == undefined ) { ch = " "; }
+            l = l ? l : 0;
+            c = c ? c : 0;
+            ch = ch ? ch : " ";
 
             let p_size = 3 * this.scale;        /* pixel size */
             let p_space = 1.2 * this.scale;     /* space between two pixels */
@@ -164,7 +164,7 @@ class newLCD {
             let origin_x = c_space + ( w * c );
             let origin_y = c_space + ( h * l );
 
-            /*  Draw background */
+            /* Draw background */
             let shape = document.createElementNS(svgns, "rect");
             shape.setAttributeNS(null, "x", origin_x); 
             shape.setAttributeNS(null, "y", origin_y);
@@ -316,7 +316,7 @@ class newLCD {
          * must be set at initialisation, before any other method
          */
 
-        /* set onclick function */
+        /* Set onclick function */
         this.setOnClick = function(n) {
             if ( typeof n == 'string' ) {
                 this.onclick = n;
