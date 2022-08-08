@@ -120,6 +120,7 @@ class newLCD {
         this.backColor = '#ccff99';      // Pixel color when off
         this.displayBuffer = new Array (this.rows * this.columns) ; 
         this.onclick;
+        this.pixelShape = 'square';
 
         /* character dimensions in pixels */
         const char_width = 6 ; 
@@ -191,14 +192,25 @@ class newLCD {
                     if ( j == char_width - 1 ) {
                         color = this.backlight;
                     }
-                    shape = document.createElementNS(svgns, "rect");
-                    shape.setAttributeNS(null, "x", x);
-                    shape.setAttributeNS(null, "y", y);
-                    shape.setAttributeNS(null, "width", p_size);
-                    shape.setAttributeNS(null, "height", p_size);
-                    shape.setAttributeNS(null, "fill", color);
-                    svg.appendChild(shape);
-                    y = y + p_size + p_space;
+                    if ( this.pixelShape === 'square' ) {
+                        shape = document.createElementNS(svgns, "rect");
+                        shape.setAttributeNS(null, "x", x);
+                        shape.setAttributeNS(null, "y", y);
+                        shape.setAttributeNS(null, "width", p_size);
+                        shape.setAttributeNS(null, "height", p_size);
+                        shape.setAttributeNS(null, "fill", color);
+                        svg.appendChild(shape);
+                        y = y + p_size + p_space;
+                    }
+                    if ( this.pixelShape === 'round' ) {
+                        shape = document.createElementNS(svgns, "circle");
+                        shape.setAttributeNS(null, "r", p_size / 2);
+                        shape.setAttributeNS(null, "cx", x + (p_size / 2));
+                        shape.setAttributeNS(null, "cy", y + (p_size / 2));
+                        shape.setAttributeNS(null, "fill", color);
+                        svg.appendChild(shape);
+                        y = y + p_size + p_space;
+                    }
                 }
                 x = x + p_size + p_space;
             }
@@ -293,6 +305,13 @@ class newLCD {
         this.setBacklight = function(n) {
             if ( typeof n == 'string' ) {
                 this.backlight = n;
+                this.refresh();
+            }
+        }
+
+        this.setPixelShape = function(n) {
+            if ( typeof n == 'string' ) {
+                this.pixelShape = n;
                 this.refresh();
             }
         }
