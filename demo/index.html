@@ -4,33 +4,18 @@
       <title>hd44780 Display demo</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <script src="../lcd.js"></script>
    </head>
    <body style="background-color:black">
       </script> 
       <div class="hd44780">
-            <svg id="svg" xmlns="http://www.w3.org/2000/svg"
-                          preserveAspectRatio="xMidYMid meet"
+            <svg id="svg" preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 600 200">
             </svg>
       </div>
-      <div>
+      <div align=center>
             <input placeholder="Enter some text" name="name"/>
             <p id="values"></p>
-            <script> 
-		var LCD = new newLCD('svg');
-		LCD.clear();
-		LCD.puts("    Hello\n    World!");
-                const input = document.querySelector('input');
-                const log = document.getElementById('values');
-                input.addEventListener('input', updateText);
-                function updateText(e) {
-                   LCD.clear();
-                   LCD.puts(e.target.value);
-                }
-              
-            </script>
-
+            <script type="module" src="demo.js"></script>
       </div>
    </body>
 </html>
