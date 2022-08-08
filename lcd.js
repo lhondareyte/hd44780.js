@@ -192,6 +192,9 @@ class newLCD {
                     if ( j == char_width - 1 ) {
                         color = this.backlight;
                     }
+                    if ( this.pixelShape != 'square' && this.pixelShape != 'round' ) {
+                        this.pixelShape = 'square';
+                    }
                     if ( this.pixelShape === 'square' ) {
                         shape = document.createElementNS(svgns, "rect");
                         shape.setAttributeNS(null, "x", x);
