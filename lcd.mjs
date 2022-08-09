@@ -106,7 +106,7 @@ const default_font = [
     [ 0xff, 0xff, 0xff, 0xff, 0xff ]   /* block */
 ];
 
-class newLCD {
+class Lcd {
     constructor (id) {
         this.documentId = id;
         this.rows = 2;
