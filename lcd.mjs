@@ -333,4 +333,4 @@ class Lcd {
     }
 }
 
-export { newLCD, default_font };
+export { Lcd, default_font };
