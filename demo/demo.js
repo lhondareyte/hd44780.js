@@ -1,5 +1,5 @@
 import {default_font, newLCD} from '../lcd.mjs';
-var LCD = new newLCD('svg');
+var LCD = new Lcd('svg');
 
 function updateText(e) {
    LCD.clear();
