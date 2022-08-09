@@ -271,45 +271,6 @@ class Lcd {
             }
         }
 
-        /* Select alternate font */
-        this.setFont = function(a) {
-            if ( typeof n == 'array' ) {
-                this.font = a;
-                this.refresh();
-            }
-        }
-
-        this.setRows = function(n) {
-            if ( typeof n == 'number' ) {
-                this.rows = n;
-                this.displayBuffer.length = this.rows * this.columns ; 
-                this.refresh();
-            }
-        }
-
-        this.setColumns = function(n) {
-            if ( typeof n == 'number' ) {
-                this.columns = n;
-                this.displayBuffer.length = this.rows * this.columns ; 
-                this.refresh();
-            }
-        }
-
-        /* Set backlight color */
-        this.setBacklight = function(n) {
-            if ( typeof n == 'string' ) {
-                this.backlight = n;
-                this.refresh();
-            }
-        }
-
-        this.setPixelShape = function(n) {
-            if ( n === 'square' || n === 'round' ) {
-                this.pixelShape = n;
-                this.refresh();
-            }
-        }
-
         this.setBackColor = function(n) {
             if ( typeof n == 'string' ) {
                 this.backColor = n;
@@ -324,12 +285,52 @@ class Lcd {
             }
         }
 
+        /* Set backlight color */
+        this.setBacklight = function(n) {
+            if ( typeof n == 'string' ) {
+                this.backlight = n;
+                this.refresh();
+            }
+        }
+
+       /*
+        * LCD global methods
+        * must be set at initialisation, before any other method
+        */
+
         /* Set scale, default 1 */
         this.setScale = function(n) {
             if ( typeof n == 'number' && n > 0) {
                 this.scale = n;
             }
         }
+
+        this.setPixelShape = function(n) {
+            if ( n === 'square' || n === 'round' ) {
+                this.pixelShape = n;
+            }
+        }
+                /* Select alternate font */
+        this.setFont = function(a) {
+            if ( typeof n == 'array' ) {
+                this.font = a;
+            }
+        }
+
+        this.setRows = function(n) {
+            if ( typeof n == 'number' ) {
+                this.rows = n;
+                this.displayBuffer.length = this.rows * this.columns ; 
+            }
+        }
+
+        this.setColumns = function(n) {
+            if ( typeof n == 'number' ) {
+                this.columns = n;
+                this.displayBuffer.length = this.rows * this.columns ; 
+            }
+        }
+
     }
 }
 
