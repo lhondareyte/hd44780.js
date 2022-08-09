@@ -119,7 +119,6 @@ class newLCD {
         this.pixelColor = 'black';
         this.backColor = '#ccff99';      // Pixel color when off
         this.displayBuffer = new Array (this.rows * this.columns) ; 
-        this.onclick;
         this.pixelShape = 'square';
 
         /* character dimensions in pixels */
@@ -172,9 +171,6 @@ class newLCD {
             shape.setAttributeNS(null, "width", w);
             shape.setAttributeNS(null, "height", h);
             shape.setAttributeNS(null, "fill", this.backColor); 
-            if (this.onclick) {
-                shape.setAttributeNS(null, "onclick", onclick); 
-            }
             svg.appendChild(shape);
 
             /* Draw character */
@@ -198,19 +194,16 @@ class newLCD {
                         shape.setAttributeNS(null, "y", y);
                         shape.setAttributeNS(null, "width", p_size);
                         shape.setAttributeNS(null, "height", p_size);
-                        shape.setAttributeNS(null, "fill", color);
-                        svg.appendChild(shape);
-                        y = y + p_size + p_space;
                     }
                     if ( this.pixelShape === 'round' ) {
                         shape = document.createElementNS(svgns, "circle");
                         shape.setAttributeNS(null, "r", p_size / 2);
                         shape.setAttributeNS(null, "cx", x + (p_size / 2));
                         shape.setAttributeNS(null, "cy", y + (p_size / 2));
-                        shape.setAttributeNS(null, "fill", color);
-                        svg.appendChild(shape);
-                        y = y + p_size + p_space;
                     }
+                    shape.setAttributeNS(null, "fill", color);
+                    svg.appendChild(shape);
+                    y = y + p_size + p_space;
                 }
                 x = x + p_size + p_space;
             }
@@ -251,6 +244,7 @@ class newLCD {
             }
         }
 
+        /* Return current line numbner */
         this.currentLine = function () {
             var l = Math.floor (this.current_location / this.columns);
             var r = this.current_location % this.columns ; 
@@ -327,18 +321,6 @@ class newLCD {
             if ( typeof n == 'string' ) {
                 this.pixelColor = n;
                 this.refresh();
-            }
-        }
-
-        /*
-         * LCD global methods
-         * must be set at initialisation, before any other method
-         */
-
-        /* Set onclick function */
-        this.setOnClick = function(n) {
-            if ( typeof n == 'string' ) {
-                this.onclick = n;
             }
         }
 
