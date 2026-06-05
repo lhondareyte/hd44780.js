@@ -2,4 +2,5 @@
 
 Javascript class to mimic an alphanumeric LCD display 
 
-demo available [here](http://lhondareyte.free.fr/hd44780/demo)
+## Links
+* [demo available here](https://lhondareyte.pages-perso.free.fr/hd44780/demo)
